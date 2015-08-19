@@ -24,7 +24,7 @@ Reactor.prototype = {
 
   isActive: function() {
     return this.active && this.hasPendingTasks();
-  }
+  },
 
   hasPendingTasks: function() {
     return this.pendingTasks.size > 0;
