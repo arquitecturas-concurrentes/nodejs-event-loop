@@ -8,10 +8,16 @@ describe("Transferencia", function() {
     var origen = new Cuenta(100);
     var destino = new Cuenta(100);
 
-    var tx1 = new Transferencia(origen, destino, 30);
-    tx1.ejecutar();
+    [ new Transferencia(origen, destino, 30),
+      new Transferencia(origen, destino, 40),
+      new Transferencia(origen, destino, 10),
+      new Transferencia(origen, destino, 50),
+      new Transferencia(destino, origen, 10),
+      new Transferencia(destino, origen, 20)].forEach(function(it){
+        it.ejecutar();
+      });
 
-    assert.equal(origen.monto, 70);
-    assert.equal(destino.monto, 130);
+    assert.equal(origen.monto, 50);
+    assert.equal(destino.monto, 150);
   }) 
 });
