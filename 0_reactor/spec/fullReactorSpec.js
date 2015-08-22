@@ -1,5 +1,9 @@
 var assert = require("assert");
-var Timer = require("./timer.js");
+
+var FakeSelect = require("../fakeSelect");
+var Timer = require("../timer.js");
+var FakeClock = require("../fakeClock");
+var IO = require("../io");
 
 function FullReactor(select, clock) {
   this._select = select;
@@ -86,55 +90,6 @@ FullReactor.prototype = {
         handler));
   }
 }
-
-function IO(select) {
-  this._select = select;
-}
-
-IO.prototype = {
-  read: function(cont) {
-    this._select.pushEvent("read-console", cont);
-  } 
-}
-
-function Event(result, handler) {
-  this._result = result;
-  this._handler = handler;
-}
-
-Event.prototype.fire = function(reactor) {
-  this._handler(this._result, reactor);
-}
-
-function FakeClock() {
-}
-
-FakeClock.prototype.now = function() {
-  return { 
-    after: function(other) { return true; },
-    plus: function() { return {} }
-  }
-}
-
-function FakeSelect() {
-  this._availableEvents = [];
-}
-
-FakeSelect.prototype = {
-  pushEvent: function(_event, handler) {
-    this._availableEvents.push(new Event("hola", handler));
-  }, 
-  nextEvent: function() {
-    return this._availableEvents.pop();
-  },
-  hasAvailableEvents: function() {
-    return this._availableEvents.length > 0;
-  },
-  hasPendingEvents: function() {
-    return this.hasAvailableEvents();
-  }
-}
-
 
 describe("full reactor", function() {
   var reactor = new FullReactor(new FakeSelect(), new FakeClock());

@@ -1,5 +1,7 @@
 var assert = require("assert");
 
+var FakeSelect = require("../fakeSelect");
+
 function SimpleReactor() {
   this._tasks = [];
   this._stopped = true;

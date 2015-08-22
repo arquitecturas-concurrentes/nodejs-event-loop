@@ -1,5 +1,8 @@
 var assert = require("assert");
 
+var FakeSelect = require("../fakeSelect");
+var IO = require("../io");
+
 function ReactorWithIO(select) {
   this._select = select;
   this._tasks = [];
@@ -60,45 +63,6 @@ ReactorWithIO.prototype = {
     this._tasks.push(task);
   }
 }
-
-function IO(select) {
-  this._select = select;
-}
-
-IO.prototype = {
-  read: function(cont) {
-    this._select.pushEvent("read-console", cont);
-  } 
-}
-
-function Event(result, handler) {
-  this._result = result;
-  this._handler = handler;
-}
-
-Event.prototype.fire = function(reactor) {
-  this._handler(this._result, reactor);
-}
-
-function FakeSelect() {
-  this._availableEvents = [];
-}
-
-FakeSelect.prototype = {
-  pushEvent: function(_event, handler) {
-    this._availableEvents.push(new Event("hola", handler));
-  }, 
-  nextEvent: function() {
-    return this._availableEvents.pop();
-  },
-  hasAvailableEvents: function() {
-    return this._availableEvents.length > 0;
-  },
-  hasPendingEvents: function() {
-    return this.hasAvailableEvents();
-  }
-}
-
 
 describe("simple reactor", function() {
   var reactor = new ReactorWithIO(new FakeSelect());
