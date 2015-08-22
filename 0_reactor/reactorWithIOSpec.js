@@ -8,24 +8,25 @@ function ReactorWithIO(select) {
 
 ReactorWithIO.prototype = {
   run: function() {
-    this._stopped = false;
-    try {
+    this.withinRun(function() {
       while (this.hasPendingIO() || this.hasPendingTasks()) {
         this.processTasks();
         this.processIO();  
-      }      
+      }
+    });
+  },
+
+  withinRun: function(action) {
+    this._stopped = false;
+    try {
+      action.call(this);      
     } finally {
       this._stopped = true;
     }
   },
 
   get io() {
-    var self = this;
-    return {
-      read: function(cont) {
-        self._select.pushEvent("read-console", cont);
-      } 
-    }
+    return new IO(this._select);
   },
 
   hasPendingIO: function() {
@@ -58,6 +59,16 @@ ReactorWithIO.prototype = {
   doLater: function(task) {
     this._tasks.push(task);
   }
+}
+
+function IO(select) {
+  this._select = select;
+}
+
+IO.prototype = {
+  read: function(cont) {
+    this._select.pushEvent("read-console", cont);
+  } 
 }
 
 function Event(result, handler) {
