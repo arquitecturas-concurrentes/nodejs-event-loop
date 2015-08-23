@@ -1,0 +1,14 @@
+{
+  "name": "reactor",
+  "version": "0.0.0",
+  "description": "",
+  "main": "event.js",
+  "scripts": {
+    "test": "mocha spec"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "~2.2.5"
+  }
+}
