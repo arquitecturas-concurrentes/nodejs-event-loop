@@ -138,7 +138,7 @@ describe("full reactor", function() {
 
 
   it("can run timers", function() {
-    var x = 0; 
+    var x = 0;
 
     timers.setTimeout(100, function() {x++})
     timers.setTimeout(100, function() {x++})

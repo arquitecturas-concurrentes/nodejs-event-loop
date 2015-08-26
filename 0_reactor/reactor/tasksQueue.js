@@ -11,7 +11,7 @@ TasksQueue.prototype = {
       var task = this._tasks.pop();
       task(this)
     }
-  }, 
+  },
 
   pushTask: function(task) {
     this._tasks.push(task);

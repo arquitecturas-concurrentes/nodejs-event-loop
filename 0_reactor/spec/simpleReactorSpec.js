@@ -35,7 +35,7 @@ SimpleReactor.prototype = {
 
 describe("simple reactor", function() {
   var reactor = new SimpleReactor();
-  
+
   it("ends when nothing is scheduled", function(){
     reactor.run();
     assert(reactor.isStopped());

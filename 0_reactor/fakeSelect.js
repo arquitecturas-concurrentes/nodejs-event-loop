@@ -7,7 +7,7 @@ function FakeSelect() {
 FakeSelect.prototype = {
   pushEvent: function(_event, handler) {
     this._availableEvents.push(new Event("hola", handler));
-  }, 
+  },
   nextEvent: function() {
     return this._availableEvents.pop();
   },

@@ -18,12 +18,12 @@ FullReactor.prototype = {
     this.withinRun(function() {
       while (
         this.hasPendingIO() ||
-        this.hasPendingTasks() || 
+        this.hasPendingTasks() ||
         this.hasPendingTimers()) {
 
         this.processTasks();
-        this.processIO(); 
-        this.processTimers(); 
+        this.processIO();
+        this.processTimers();
       }
     });
   },
@@ -31,7 +31,7 @@ FullReactor.prototype = {
   withinRun: function(action) {
     this._stopped = false;
     try {
-      action.call(this);      
+      action.call(this);
     } finally {
       this._stopped = true;
     }
@@ -193,7 +193,7 @@ describe("full reactor", function() {
 
 
   it("can run timers", function() {
-    var x = 0; 
+    var x = 0;
 
     reactor.doAfter(100, function() {x++})
     reactor.doAfter(100, function() {x++})

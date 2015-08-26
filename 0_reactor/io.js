@@ -5,7 +5,7 @@ function IO(select) {
 IO.prototype = {
   read: function(cont) {
     this._select.pushEvent("read-console", cont);
-  } 
+  }
 }
 
 

@@ -14,7 +14,7 @@ ReactorWithIO.prototype = {
     this.withinRun(function() {
       while (this.hasPendingIO() || this.hasPendingTasks()) {
         this.processTasks();
-        this.processIO();  
+        this.processIO();
       }
     });
   },
@@ -22,7 +22,7 @@ ReactorWithIO.prototype = {
   withinRun: function(action) {
     this._stopped = false;
     try {
-      action.call(this);      
+      action.call(this);
     } finally {
       this._stopped = true;
     }
