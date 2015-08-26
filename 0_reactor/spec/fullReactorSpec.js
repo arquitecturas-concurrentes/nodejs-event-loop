@@ -110,7 +110,7 @@ describe("full reactor", function() {
 
 
 
-  it("can execute enqued tasks", function(){
+  it("can execute enqueued tasks", function(){
     var x = 0;
 
     reactor.doLater(function(){ x++; });
@@ -120,7 +120,7 @@ describe("full reactor", function() {
     assert.equal(x, 1);
   });
 
-  it("can is not stopped while running", function(done){
+  it("is not stopped while running", function(done){
 
     reactor.doLater(function(){
       assert(!reactor.isStopped());
@@ -143,7 +143,7 @@ describe("full reactor", function() {
   });
 
 
-  it("is stoped on exception", function(){
+  it("is stopped on exception", function(){
     reactor.doLater(function(){
       throw new Error("ups");
     });
@@ -171,7 +171,7 @@ describe("full reactor", function() {
     assert.equal(x, "hola");
   });
 
-  it("can schedule tasks fires within io", function(done) {
+  it("can schedule tasks firing within io", function(done) {
     reactor.doLater(function(reactor){
       reactor.io.read(function(result, reactor){
         reactor.doLater(function(){
