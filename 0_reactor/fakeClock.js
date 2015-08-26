@@ -2,7 +2,7 @@ function FakeClock() {
 }
 
 FakeClock.prototype.now = function() {
-  return { 
+  return {
     after: function(other) { return true; },
     plus: function() { return {} }
   }

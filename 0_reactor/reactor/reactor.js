@@ -7,7 +7,7 @@ Reactor.prototype = {
     this.withinRun(function() {
       while (this.hasPendingWorkUnits()) {
         this.processWorkUnits();
-      }      
+      }
     });
   },
 
@@ -26,7 +26,7 @@ Reactor.prototype = {
   withinRun: function(action) {
     this._stopped = false;
     try {
-      action.call(this);      
+      action.call(this);
     } finally {
       this._stopped = true;
     }

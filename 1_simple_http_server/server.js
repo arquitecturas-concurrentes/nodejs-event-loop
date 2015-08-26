@@ -14,7 +14,7 @@ function writeResponse(data, response) {
 }
 
 function trueFilenameFor(stats, filename) {
-    if (stats.isDirectory()) { 
+    if (stats.isDirectory()) {
         return filename + '/index.html';
     } else {
         return filename;
@@ -53,11 +53,11 @@ http.createServer(function (request, response) {
                     writeError(err, response);
                     return;
                 }
-                writeResponse({ 
-                    status: 200, 
-                    contentType: contentTypesByExtension[path.extname(trueFilename)] || "text/plain", 
-                    content:  file, 
-                    mode: "binary" }, 
+                writeResponse({
+                    status: 200,
+                    contentType: contentTypesByExtension[path.extname(trueFilename)] || "text/plain",
+                    content:  file,
+                    mode: "binary" },
                 response);
             });
         });
